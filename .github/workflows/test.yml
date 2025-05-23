@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.10", "3.11"]
+        python-version: ["3.13"]
 
     steps:
     - uses: actions/checkout@v3
@@ -33,6 +33,9 @@ jobs:
     - name: Lint with Ruff
       run: |
         ruff check .
+    - name: Type check with mypy
+      run: |
+        mypy .
     - name: Run tests
       run: |
         pytest tests/
