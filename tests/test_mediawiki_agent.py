@@ -1,4 +1,4 @@
-from mediawiki_agent import MediaWikiAgent
+from mediawiki_agent.agent import MediaWikiAgent
 
 
 def test_mediawiki_agent_initialization():
