@@ -15,9 +15,9 @@ def test_get_page_content_tool(mocker):
     site_url = "https://test.wikipedia.org/w/api.php"
     tool = GetPageContentTool(site_url=site_url)
 
-    # 4. Call the run method
+    # 4. Call the forward method
     page_title = "Test Page"
-    result = tool.run(page_title)
+    result = tool.forward(page_title) # Changed from tool.run
 
     # 5. Assertions
     mock_site_constructor.assert_called_once_with(url=site_url)

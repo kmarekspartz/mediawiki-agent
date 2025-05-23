@@ -12,7 +12,7 @@ class GetPageContentTool(Tool):
         super().__init__()
         self.site = pywikibot.Site(url=site_url)
 
-    def run(self, page_title: str) -> str:
+    def forward(self, page_title: str) -> str: # Renamed from run
         page = pywikibot.Page(self.site, page_title)
         return page.text
 
