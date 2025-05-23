@@ -4,6 +4,8 @@ from smolagents.tools import Tool
 class GetPageContentTool(Tool):
     name = "get_page_content"
     description = "Gets the content of a MediaWiki page."
+    inputs = {"page_title": {"type": "string", "description": "The title of the MediaWiki page to retrieve."}}
+    outputs = {"page_content": {"type": "string", "description": "The text content of the MediaWiki page."}}
 
     def __init__(self, site_url):
         super().__init__()
