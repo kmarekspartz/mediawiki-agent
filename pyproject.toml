@@ -20,3 +20,6 @@ exclude = ["/tests"]
 test = [
     "pytest"
 ]
+lint = [
+    "ruff"
+]
