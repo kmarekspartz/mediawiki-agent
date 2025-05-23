@@ -1,6 +1,6 @@
 # MediaWiki Agent
 
-This project provides a [Smolagents](https://smolagents.org) component designed for robust interaction with [MediaWiki](https://www.mediawiki.org/wiki/MediaWiki) sites, such as Wikipedia and other wikis. It leverages the comprehensive [Pywikibot](https://pypi.org/project/pywikibot/) library to offer a powerful and flexible way to automate tasks, retrieve data, and manage content on MediaWiki platforms.
+This project provides a [Smolagents](https://smolagents.org) component designed for robust interaction with [MediaWiki](https://www.mediawiki.org/wiki/MediaWiki) sites, such as various wikis powered by MediaWiki. It leverages the comprehensive [Pywikibot](https://pypi.org/project/pywikibot/) library to offer a powerful and flexible way to automate tasks, retrieve data, and manage content on MediaWiki platforms.
 
 The primary purpose of this agent is to enable developers and users to:
 *   Programmatically access and retrieve content from MediaWiki pages.
@@ -45,19 +45,20 @@ Further development will focus on expanding these core features and ensuring rob
 
 ### GetPageContentTool
 
-The `GetPageContentTool` can be used to fetch the content of a page from a MediaWiki site, such as Wikipedia.
+The `GetPageContentTool` can be used to fetch the content of a page from any MediaWiki site.
 
 Here's an example of how to use it:
 
 ```python
 from mediawiki_agent.tools.get_page_content_tool import GetPageContentTool
 
-# Instantiate the tool for Wikipedia
-# Or replace with your own MediaWiki site URL
-tool = GetPageContentTool(site_url="https://en.wikipedia.org/w/api.php")
+# Instantiate the tool for your MediaWiki site
+# Replace "https://your-mediawiki-site.org/w/api.php" with the actual API URL of your wiki.
+tool = GetPageContentTool(site_url="https://your-mediawiki-site.org/w/api.php")
 
 # Get the content of a page
-page_title = "Python (programming language)"
+# Replace "Sample Page Title" with a page title from your wiki
+page_title = "Sample Page Title"
 content = tool.run(page_title)
 
 # Print the fetched content
