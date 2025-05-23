@@ -18,7 +18,8 @@ exclude = ["/tests"]
 
 [project.optional-dependencies]
 test = [
-    "pytest"
+    "pytest",
+    "pytest-mock"
 ]
 lint = [
     "ruff"

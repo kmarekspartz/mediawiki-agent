@@ -25,6 +25,8 @@ jobs:
         pip install pytest
         pip install -e .
         pip install .[lint]
+        pip install -e .[test]
+
     - name: Check formatting with Ruff
       run: |
         ruff format --check .
