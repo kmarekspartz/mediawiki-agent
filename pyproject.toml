@@ -21,3 +21,6 @@ test = [
     "pytest",
     "pytest-mock"
 ]
+lint = [
+    "ruff"
+]

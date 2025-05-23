@@ -1,6 +1,7 @@
 import pywikibot
 from smolagents.tools import Tool
 
+
 class GetPageContentTool(Tool):
     name = "get_page_content"
     description = "Gets the content of a MediaWiki page."
@@ -15,5 +16,6 @@ class GetPageContentTool(Tool):
     def forward(self, page_title: str) -> str: # Renamed from run
         page = pywikibot.Page(self.site, page_title)
         return page.text
+
 
 # Additional tools can be added similarly.

@@ -1,1 +1,1 @@
-from .agent import MediaWikiAgent
+__all__ = []
