@@ -10,11 +10,19 @@ The primary purpose of this agent is to enable developers and users to:
 
 ## Installation
 
-To install the necessary dependencies, run the following command:
+To use this project, it's recommended to clone the repository and install dependencies using Poetry:
 
 ```bash
-pip install smolagents pywikibot
+git clone https://github.com/kmarekspartz/mediawiki-agent.git
+cd mediawiki-agent
+poetry install
 ```
+
+If you want to add new dependencies to the project, you can use:
+```bash
+poetry add <package-name>
+```
+The main dependencies are `smolagents` and `pywikibot`.
 
 ## Potential Usage Examples
 
@@ -71,14 +79,15 @@ print(content)
 
 This project uses `ruff` for formatting and linting.
 
-To install `ruff`, run:
+To install `ruff` and other development dependencies, run:
 
 ```bash
-pip install .[lint]
+poetry install --with lint --with typecheck --with test 
 ```
+(Note: the previous command `poetry install --with lint` was updated to include other dev groups as they are defined in `pyproject.toml` and it's good practice to inform how to install all of them).
 
 To format and lint the code, run:
 
 ```bash
-ruff format . && ruff check .
+poetry run ruff format . && poetry run ruff check .
 ```

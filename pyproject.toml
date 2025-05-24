@@ -1,29 +1,21 @@
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-
-[project]
+[tool.poetry]
 name = "mediawiki-agent"
 version = "0.1.0"
 description = "smolagent Tools for interacting with MediaWiki instances"
-authors = [{name = "kmarekspartz"}]
-requires-python = ">=3.13"
-dependencies = [
-    "smolagents",
-    "pywikibot"
-]
+authors = ["kmarekspartz"]
+readme = "README.md"
 
-[tool.hatch.build.targets.sdist]
-exclude = ["/tests"]
+[tool.poetry.dependencies]
+python = ">=3.13"
+smolagents = "*"
+pywikibot = "*"
 
-[project.optional-dependencies]
-test = [
-    "pytest",
-    "pytest-mock"
-]
-lint = [
-    "ruff"
-]
-typecheck = [
-    "mypy"
-]
+[tool.poetry.group.dev.dependencies]
+pytest = "*"
+pytest-mock = "*"
+ruff = "*"
+mypy = "*"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
