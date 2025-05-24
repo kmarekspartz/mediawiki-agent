@@ -10,68 +10,29 @@ on:
     branches: [ main ]
 
 jobs:
-  _python-matrix: &python_matrix
-    python-version: ["3.13"]
-
-  _setup-python-step: &setup_python_step
-    name: Set up Python ${{ matrix.python-version }}
-    uses: actions/setup-python@v4
-    with:
-      python-version: ${{ matrix.python-version }}
-
-  _pip-upgrade-step: &pip_upgrade_step
-    name: Upgrade pip
-    run: python -m pip install --upgrade pip
-
   lint:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        <<: *python_matrix
     steps:
-    - uses: actions/checkout@v3
-    - <<: *setup_python_step
-    - <<: *pip_upgrade_step
-    - name: Install lint dependencies
-      run: |
-        pip install .[lint]
-    - name: Check formatting with Ruff
-      run: |
-        ruff format --check .
-    - name: Lint with Ruff
-      run: |
-        ruff check .
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+    - run: pip install .[lint]
+    - run: ruff format --check .
+    - run: ruff check .
 
   typecheck:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        <<: *python_matrix
     steps:
-    - uses: actions/checkout@v3
-    - <<: *setup_python_step
-    - <<: *pip_upgrade_step
-    - name: Install typecheck dependencies
-      run: |
-        pip install -e .
-        pip install .[typecheck]
-    - name: Type check with mypy
-      run: |
-        mypy .
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+    - run: pip install -e .
+    - run: pip install .[typecheck]
+    - run: mypy .
 
   test:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        <<: *python_matrix
     steps:
-    - uses: actions/checkout@v3
-    - <<: *setup_python_step
-    - <<: *pip_upgrade_step
-    - name: Install test dependencies
-      run: |
-        pip install -e .
-        pip install -e .[test]
-    - name: Run tests
-      run: |
-        pytest tests/
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+    - run: pip install -e .
+    - run: pip install -e .[test]
+    - run: pytest tests/
