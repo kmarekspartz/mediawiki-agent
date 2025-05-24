@@ -22,8 +22,6 @@ test = [
     "pytest-mock"
 ]
 lint = [
-    "ruff"
-]
-typecheck = [
+    "ruff",
     "mypy"
 ]
