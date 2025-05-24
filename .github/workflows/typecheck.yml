@@ -1,4 +1,4 @@
-name: Tests
+name: Type Check
 
 permissions:
   contents: read
@@ -10,7 +10,7 @@ on:
     branches: [ main ]
 
 jobs:
-  test:
+  typecheck:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -25,20 +25,8 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pytest
         pip install -e .
-        pip install .[lint]
-        pip install -e .[test]
-
-    - name: Check formatting with Ruff
-      run: |
-        ruff format --check .
-    - name: Lint with Ruff
-      run: |
-        ruff check .
+        pip install .[lint] # mypy is included in the lint extra
     - name: Type check with mypy
       run: |
         mypy .
-    - name: Run tests
-      run: |
-        pytest tests/
