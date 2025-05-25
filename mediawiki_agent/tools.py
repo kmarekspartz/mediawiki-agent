@@ -4,7 +4,7 @@ from typing import Any
 
 
 @tool
-def get_page_content(site: pywikibot.Site, page_title: str) -> Any:  # str
+def get_page_content(page_title: str) -> Any:  # str
     """
     Gets the content of a MediaWiki page using a pywikibot Site.
 
@@ -15,5 +15,6 @@ def get_page_content(site: pywikibot.Site, page_title: str) -> Any:  # str
     Returns:
         A string with the text content of the MediaWiki page
     """
+    site = pywikibot.Site()
     page = pywikibot.Page(site, page_title)
     return page.text
