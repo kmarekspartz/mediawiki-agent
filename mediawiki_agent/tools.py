@@ -1,6 +1,5 @@
 import pywikibot
 from smolagents import tool
-from typing import Any
 
 @tool
 def get_page_content(site: pywikibot.Site, page_title: str) -> str:
