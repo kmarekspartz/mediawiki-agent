@@ -1,33 +1,19 @@
 import pywikibot
-from smolagents.tools import Tool
+from smolagents import tool
 from typing import Any
 
 
-class GetPageContentTool(Tool):
-    name = "get_page_content"
-    description = "Gets the content of a MediaWiki page."
-    inputs = {
-        "page_title": {
-            "type": "string",
-            "description": "The title of the MediaWiki page to retrieve.",
-        }
-    }
-    outputs = {
-        "page_content": {
-            "type": "string",
-            "description": "The text content of the MediaWiki page.",
-        }
-    }
-    output_type = "string"
+@tool
+def get_page_content(site: pywikibot.Site, page_title: str) -> Any:  # str
+    """
+    Gets the content of a MediaWiki page using a pywikibot Site.
 
-    def __init__(self, site_url: str) -> None:
-        super().__init__()
-        self.site: pywikibot.Site = pywikibot.Site(url=site_url)
+    Args:
+        site: a pywikibot.Site.
+        page_title: a string with the page title/path to the page within the Wiki.
 
-    # Renamed from run
-    def forward(self, page_title: str) -> Any:  # str
-        page = pywikibot.Page(self.site, page_title)
-        return page.text
-
-
-# Additional tools can be added similarly.
+    Returns:
+        A string with the text content of the MediaWiki page
+    """
+    page = pywikibot.Page(site, page_title)
+    return page.text
