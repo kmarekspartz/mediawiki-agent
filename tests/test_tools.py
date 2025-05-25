@@ -1,5 +1,4 @@
-import unittest
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock # Keep MagicMock from unittest.mock
 
 import requests  # For requests.exceptions.RequestException
 
@@ -24,10 +23,10 @@ def test_get_page_content_tool(mocker):  # mocker is from pytest-mock
     assert result == "This is the page content."
 
 
-class TestAddText(unittest.TestCase):
-    @patch("mediawiki_agent.tools.pywikibot.Page")
-    @patch("mediawiki_agent.tools.pywikibot.Site")
-    def test_add_text_bottom(self, MockSite, MockPage):
+class TestAddText:
+    def test_add_text_bottom(self, mocker):
+        MockSite = mocker.patch("mediawiki_agent.tools.pywikibot.Site")
+        MockPage = mocker.patch("mediawiki_agent.tools.pywikibot.Page")
         mock_site_instance = MockSite.return_value
         mock_page_instance = MockPage.return_value
         mock_page_instance.text = "Existing content"
@@ -40,12 +39,12 @@ class TestAddText(unittest.TestCase):
 
         MockSite.assert_called_once()
         MockPage.assert_called_once_with(mock_site_instance, page_title)
-        self.assertEqual(mock_page_instance.text, "Existing content New text")
+        assert mock_page_instance.text == "Existing content New text"
         mock_page_instance.save.assert_called_once_with(summary)
 
-    @patch("mediawiki_agent.tools.pywikibot.Page")
-    @patch("mediawiki_agent.tools.pywikibot.Site")
-    def test_add_text_top(self, MockSite, MockPage):
+    def test_add_text_top(self, mocker):
+        MockSite = mocker.patch("mediawiki_agent.tools.pywikibot.Site")
+        MockPage = mocker.patch("mediawiki_agent.tools.pywikibot.Page")
         mock_site_instance = MockSite.return_value
         mock_page_instance = MockPage.return_value
         mock_page_instance.text = "Existing content"
@@ -58,12 +57,12 @@ class TestAddText(unittest.TestCase):
 
         MockSite.assert_called_once()
         MockPage.assert_called_once_with(mock_site_instance, page_title)
-        self.assertEqual(mock_page_instance.text, "New text Existing content")
+        assert mock_page_instance.text == "New text Existing content"
         mock_page_instance.save.assert_called_once_with(summary)
 
-    @patch("mediawiki_agent.tools.pywikibot.Page")
-    @patch("mediawiki_agent.tools.pywikibot.Site")
-    def test_add_text_empty_page_bottom(self, MockSite, MockPage):
+    def test_add_text_empty_page_bottom(self, mocker):
+        MockSite = mocker.patch("mediawiki_agent.tools.pywikibot.Site")
+        MockPage = mocker.patch("mediawiki_agent.tools.pywikibot.Page")
         MockSite()  # Ensures Site() is called
         mock_page_instance = MockPage.return_value
         mock_page_instance.text = ""
@@ -74,12 +73,12 @@ class TestAddText(unittest.TestCase):
 
         add_text(page_title, text_to_add, summary, position="bottom")
 
-        self.assertEqual(mock_page_instance.text, "Some text")
+        assert mock_page_instance.text == "Some text"
         mock_page_instance.save.assert_called_once_with(summary)
 
-    @patch("mediawiki_agent.tools.pywikibot.Page")
-    @patch("mediawiki_agent.tools.pywikibot.Site")
-    def test_add_text_empty_page_top(self, MockSite, MockPage):
+    def test_add_text_empty_page_top(self, mocker):
+        MockSite = mocker.patch("mediawiki_agent.tools.pywikibot.Site")
+        MockPage = mocker.patch("mediawiki_agent.tools.pywikibot.Page")
         MockSite()  # Ensures Site() is called
         mock_page_instance = MockPage.return_value
         mock_page_instance.text = ""
@@ -90,15 +89,15 @@ class TestAddText(unittest.TestCase):
 
         add_text(page_title, text_to_add, summary, position="top")
 
-        self.assertEqual(mock_page_instance.text, "Some text")
+        assert mock_page_instance.text == "Some text"
         mock_page_instance.save.assert_called_once_with(summary)
 
 
-class TestCheckWeblinks(unittest.TestCase):
-    @patch("mediawiki_agent.tools.requests.get")
-    @patch("mediawiki_agent.tools.pywikibot.Page")
-    @patch("mediawiki_agent.tools.pywikibot.Site")
-    def test_check_weblinks_no_broken_links(self, MockSite, MockPage, MockRequestsGet):
+class TestCheckWeblinks:
+    def test_check_weblinks_no_broken_links(self, mocker):
+        MockSite = mocker.patch("mediawiki_agent.tools.pywikibot.Site")
+        MockPage = mocker.patch("mediawiki_agent.tools.pywikibot.Page")
+        MockRequestsGet = mocker.patch("mediawiki_agent.tools.requests.get")
         mock_site_instance = (
             MockSite.return_value
         )  # Used in MockPage.assert_called_once_with
@@ -117,14 +116,12 @@ class TestCheckWeblinks(unittest.TestCase):
         MockSite.assert_called_once()
         MockPage.assert_called_once_with(mock_site_instance, page_title)
         MockRequestsGet.assert_called_once_with(urls[0], timeout=10)
-        self.assertEqual(result, [])
+        assert result == []
 
-    @patch("mediawiki_agent.tools.requests.get")
-    @patch("mediawiki_agent.tools.pywikibot.Page")
-    @patch("mediawiki_agent.tools.pywikibot.Site")
-    def test_check_weblinks_one_broken_link_status_code(
-        self, MockSite, MockPage, MockRequestsGet
-    ):
+    def test_check_weblinks_one_broken_link_status_code(self, mocker):
+        MockSite = mocker.patch("mediawiki_agent.tools.pywikibot.Site")
+        MockPage = mocker.patch("mediawiki_agent.tools.pywikibot.Page")
+        MockRequestsGet = mocker.patch("mediawiki_agent.tools.requests.get")
         MockSite()  # Ensures Site() is called
         mock_page_instance = MockPage.return_value
 
@@ -138,15 +135,13 @@ class TestCheckWeblinks(unittest.TestCase):
         page_title = "Test Page"
         result = check_weblinks(page_title)
 
-        self.assertEqual(result, ["http://example.com/broken"])
+        assert result == ["http://example.com/broken"]
         MockRequestsGet.assert_called_once_with(urls[0], timeout=10)
 
-    @patch("mediawiki_agent.tools.requests.get")
-    @patch("mediawiki_agent.tools.pywikibot.Page")
-    @patch("mediawiki_agent.tools.pywikibot.Site")
-    def test_check_weblinks_one_broken_link_exception(
-        self, MockSite, MockPage, MockRequestsGet
-    ):
+    def test_check_weblinks_one_broken_link_exception(self, mocker):
+        MockSite = mocker.patch("mediawiki_agent.tools.pywikibot.Site")
+        MockPage = mocker.patch("mediawiki_agent.tools.pywikibot.Page")
+        MockRequestsGet = mocker.patch("mediawiki_agent.tools.requests.get")
         MockSite()  # Ensures Site() is called
         mock_page_instance = MockPage.return_value
 
@@ -158,13 +153,13 @@ class TestCheckWeblinks(unittest.TestCase):
         page_title = "Test Page"
         result = check_weblinks(page_title)
 
-        self.assertEqual(result, ["http://example.com/timeout"])
+        assert result == ["http://example.com/timeout"]
         MockRequestsGet.assert_called_once_with(urls[0], timeout=10)
 
-    @patch("mediawiki_agent.tools.requests.get")
-    @patch("mediawiki_agent.tools.pywikibot.Page")
-    @patch("mediawiki_agent.tools.pywikibot.Site")
-    def test_check_weblinks_mixed_links(self, MockSite, MockPage, MockRequestsGet):
+    def test_check_weblinks_mixed_links(self, mocker):
+        MockSite = mocker.patch("mediawiki_agent.tools.pywikibot.Site")
+        MockPage = mocker.patch("mediawiki_agent.tools.pywikibot.Page")
+        MockRequestsGet = mocker.patch("mediawiki_agent.tools.requests.get")
         MockSite()  # Ensures Site() is called
         mock_page_instance = MockPage.return_value
 
@@ -193,18 +188,16 @@ class TestCheckWeblinks(unittest.TestCase):
         page_title = "Test Page"
         result = check_weblinks(page_title)
 
-        self.assertEqual(
-            result,
-            ["http://example.com/broken404", "http://example.com/broken_timeout"],
-        )
-        self.assertEqual(MockRequestsGet.call_count, 3)
+        assert result == [
+            "http://example.com/broken404",
+            "http://example.com/broken_timeout",
+        ]
+        assert MockRequestsGet.call_count == 3
 
-    @patch("mediawiki_agent.tools.requests.get")
-    @patch("mediawiki_agent.tools.pywikibot.Page")
-    @patch("mediawiki_agent.tools.pywikibot.Site")
-    def test_check_weblinks_no_external_links(
-        self, MockSite, MockPage, MockRequestsGet
-    ):
+    def test_check_weblinks_no_external_links(self, mocker):
+        MockSite = mocker.patch("mediawiki_agent.tools.pywikibot.Site")
+        MockPage = mocker.patch("mediawiki_agent.tools.pywikibot.Page")
+        MockRequestsGet = mocker.patch("mediawiki_agent.tools.requests.get")
         MockSite()  # Ensures Site() is called
         mock_page_instance = MockPage.return_value
         mock_page_instance.extlinks.return_value = []
@@ -212,9 +205,5 @@ class TestCheckWeblinks(unittest.TestCase):
         page_title = "Test Page"
         result = check_weblinks(page_title)
 
-        self.assertEqual(result, [])
+        assert result == []
         MockRequestsGet.assert_not_called()
-
-
-if __name__ == "__main__":
-    unittest.main()
