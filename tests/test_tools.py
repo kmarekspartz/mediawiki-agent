@@ -12,8 +12,10 @@ def test_get_page_content_tool(mocker):
         "pywikibot.Page", return_value=mock_page_instance
     )
 
+    page_title = "Test Page"
+
     # 3. Instantiate the tool
-    result = get_page_content(site=mock_site_instance, page_title = "Test Page")
+    result = get_page_content(site=mock_site_instance, page_title=page_title)
 
     # 5. Assertions
     mock_page_constructor.assert_called_once_with(mock_site_instance, page_title)
