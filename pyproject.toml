@@ -10,7 +10,8 @@ authors = [{name = "kmarekspartz"}]
 requires-python = ">=3.13"
 dependencies = [
     "smolagents",
-    "pywikibot"
+    "pywikibot",
+    "pywikibot-scripts"
 ]
 
 [tool.hatch.build.targets.sdist]
@@ -27,3 +28,6 @@ lint = [
 typecheck = [
     "mypy"
 ]
+
+[tool.ruff]
+exclude = ['user-config.py']

@@ -172,3 +172,12 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Pywikibot cookies
+pywikibot-*.lwp
+*~
+apicache
+throttle.ctrl
+user-config.py
+Pipfile
+Pipfile.lock
