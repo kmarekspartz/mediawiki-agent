@@ -1,5 +1,6 @@
 import pytest
 
+
 @pytest.mark.skip(reason="Feature not yet implemented")
 def test_mediawiki_agent_initialization():
     # agent = MediaWikiAgent("https://test.wikipedia.org/w/api.php")

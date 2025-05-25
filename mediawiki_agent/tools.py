@@ -2,8 +2,9 @@ import pywikibot
 from smolagents import tool
 from typing import Any
 
+
 @tool
-def get_page_content(site: pywikibot.Site, page_title: str) -> Any: # str
+def get_page_content(site: pywikibot.Site, page_title: str) -> Any:  # str
     """
     Gets the content of a MediaWiki page using a pywikibot Site.
 
