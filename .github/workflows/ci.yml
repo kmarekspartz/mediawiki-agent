@@ -15,8 +15,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-python@v5
-      with:
-        cache: 'pip'
     - run: pip install .[lint]
     - run: ruff format --check .
     - run: ruff check .
@@ -26,8 +24,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-python@v5
-      with:
-        cache: 'pip'
     - run: pip install -e .
     - run: pip install .[typecheck]
     - run: mypy .
@@ -37,8 +33,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-python@v5
-      with:
-        cache: 'pip'
     - run: pip install -e .
     - run: pip install -e .[test]
     - run: pytest tests/

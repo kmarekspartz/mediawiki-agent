@@ -1,11 +1,6 @@
 import pytest
 
-# Placeholder tests for integration features (e.g., importing from other wiki types) will be added here.
-
-import pytest
-
-# Placeholder tests for high-level usage scenarios will be added here.
-
+# Placeholder tests for integration features (e.g., importing from other wiki types) will be added here, or other high-level usage scenarios will be added here.
 
 @pytest.mark.skip(
     reason="High-level usage scenario, requires multiple core features and further definition"
