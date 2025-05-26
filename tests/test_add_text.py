@@ -1,7 +1,8 @@
 from mediawiki_agent.tools import add_text
 
+
 # Tests for add_text functionality
-def test_add_text_bottom(mocker):  
+def test_add_text_bottom(mocker):
     MockSite = mocker.patch("mediawiki_agent.tools.pywikibot.Site")
     MockPage = mocker.patch("mediawiki_agent.tools.pywikibot.Page")
     mock_site_instance = MockSite.return_value
@@ -16,10 +17,12 @@ def test_add_text_bottom(mocker):
 
     MockSite.assert_called_once()
     MockPage.assert_called_once_with(mock_site_instance, page_title)
-    assert mock_page_instance.text == "Existing content New text"  
+
+    assert mock_page_instance.text == "Existing content New text"
     mock_page_instance.save.assert_called_once_with(summary)
 
-def test_add_text_top(mocker): 
+
+def test_add_text_top(mocker):
     MockSite = mocker.patch("mediawiki_agent.tools.pywikibot.Site")
     MockPage = mocker.patch("mediawiki_agent.tools.pywikibot.Page")
     mock_site_instance = MockSite.return_value
@@ -34,13 +37,14 @@ def test_add_text_top(mocker):
 
     MockSite.assert_called_once()
     MockPage.assert_called_once_with(mock_site_instance, page_title)
-    assert mock_page_instance.text == "New text Existing content"  
+    assert mock_page_instance.text == "New text Existing content"
     mock_page_instance.save.assert_called_once_with(summary)
 
-def test_add_text_empty_page_bottom(mocker): 
+
+def test_add_text_empty_page_bottom(mocker):
     MockSite = mocker.patch("mediawiki_agent.tools.pywikibot.Site")
     MockPage = mocker.patch("mediawiki_agent.tools.pywikibot.Page")
-    MockSite() 
+    MockSite()
     mock_page_instance = MockPage.return_value
     mock_page_instance.text = ""
 
@@ -50,10 +54,11 @@ def test_add_text_empty_page_bottom(mocker):
 
     add_text(page_title, text_to_add, summary, position="bottom")
 
-    assert mock_page_instance.text == "Some text"  
+    assert mock_page_instance.text == "Some text"
     mock_page_instance.save.assert_called_once_with(summary)
 
-def test_add_text_empty_page_top(mocker): 
+
+def test_add_text_empty_page_top(mocker):
     MockSite = mocker.patch("mediawiki_agent.tools.pywikibot.Site")
     MockPage = mocker.patch("mediawiki_agent.tools.pywikibot.Page")
     MockSite()
@@ -66,5 +71,5 @@ def test_add_text_empty_page_top(mocker):
 
     add_text(page_title, text_to_add, summary, position="top")
 
-    assert mock_page_instance.text == "Some text"  
+    assert mock_page_instance.text == "Some text"
     mock_page_instance.save.assert_called_once_with(summary)
