@@ -16,4 +16,3 @@ def test_get_page_content_tool(mocker):
 
     mock_page_constructor.assert_called_once_with(mock_site_instance, page_title)
     assert result == "This is the page content."
-    
