@@ -2,7 +2,7 @@ from mediawiki_agent.tools import add_text
 
 
 # Tests for add_text functionality
-def test_add_text_bottom(mocker):
+def test_add_text_bottom(mocker):  
     MockSite = mocker.patch("mediawiki_agent.tools.pywikibot.Site")
     MockPage = mocker.patch("mediawiki_agent.tools.pywikibot.Page")
     mock_site_instance = MockSite.return_value
@@ -17,6 +17,7 @@ def test_add_text_bottom(mocker):
 
     MockSite.assert_called_once()
     MockPage.assert_called_once_with(mock_site_instance, page_title)
+
     assert mock_page_instance.text == "Existing content New text"
     mock_page_instance.save.assert_called_once_with(summary)
 

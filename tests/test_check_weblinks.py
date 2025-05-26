@@ -23,6 +23,7 @@ def test_check_weblinks_no_broken_links(mocker):
     MockSite.assert_called_once()
     MockPage.assert_called_once_with(mock_site_instance, page_title)
     MockRequestsGet.assert_called_once_with(urls[0], timeout=10)
+
     assert result == []
 
 
@@ -91,7 +92,7 @@ def test_check_weblinks_mixed_links(mocker):
             return response
         elif url == "http://example.com/broken_timeout":
             raise requests.exceptions.RequestException
-        return mocker.MagicMock()
+        return mocker.MagicMock()  
 
     MockRequestsGet.side_effect = side_effect_func
 
