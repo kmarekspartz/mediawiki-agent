@@ -1,8 +1,4 @@
 #!/usr/bin/env bash
-curl -fsSL https://pyenv.run | bash
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - bash)"
+export PATH=/home/jules/.local/bin:$PATH
 pip install --user pipenv
-PATH=/home/jules/.local/bin:$PATH
-pipenv install
+pipenv install --dev
