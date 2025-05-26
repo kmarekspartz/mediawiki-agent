@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 pipenv run ./lint.sh && \
     pipenv run mypy .  && \
     pipenv run pytest
