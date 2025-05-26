@@ -178,4 +178,3 @@ pywikibot-*.lwp
 *~
 apicache
 throttle.ctrl
-Pipfile.lock
