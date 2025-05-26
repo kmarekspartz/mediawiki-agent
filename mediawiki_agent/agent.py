@@ -3,6 +3,7 @@ from langchain.agents import AgentExecutor, create_openai_functions_agent
 from langchain_core.prompts import ChatPromptTemplate
 from mediawiki_agent.tools import get_page_content, add_text, check_weblinks
 
+
 llm = ChatOpenAI(
     model_name="phi-4",
     openai_api_base="http://127.0.0.1:1234/v1",
