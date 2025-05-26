@@ -5,6 +5,9 @@ name = "pypi"
 
 [packages]
 requests = "*"
+pywikibot = "*"
+pywikibot-scripts = "*"
+smolagents = "*"
 
 [dev-packages]
 pytest = "*"
@@ -12,9 +15,6 @@ pytest-mock = "*"
 ruff = "*"
 mypy = "*"
 types-requests = "*"
-smolagents = "*"
-pywikibot = "*"
-pywikibot-scripts = "*"
 
 [requires]
 python_version = "3.10"
