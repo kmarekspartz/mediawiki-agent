@@ -1,15 +1,16 @@
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock
 import pytest
 from mediawiki_agent.agent import agent_executor # The AgentExecutor instance
-# To mock the tool function directly if it's easier than mocking pywikibot calls within it for this test
-from mediawiki_agent.tools import get_page_content as get_page_content_tool_function
+# from mediawiki_agent.tools import get_page_content as get_page_content_tool_function # Not strictly needed
 from langchain_core.messages import AIMessage
 
 
-@patch('mediawiki_agent.tools.get_page_content', name='mock_get_page_content_tool_func') # Mock the actual tool function in tools.py
-@patch('mediawiki_agent.agent.ChatOpenAI', name='MockChatOpenAI') # Mock the LLM class in agent.py
-def test_langchain_agent_uses_get_page_content(MockChatOpenAI, mock_get_page_content_tool_func):
-    # Configure the mock LLM instance
+def test_langchain_agent_uses_get_page_content(mocker):
+    # Patching is now done inside the function using mocker
+    MockChatOpenAI = mocker.patch('mediawiki_agent.agent.ChatOpenAI', name='MockChatOpenAI')
+    mock_get_page_content_tool_func = mocker.patch('mediawiki_agent.tools.get_page_content', name='mock_get_page_content_tool_func')
+
+    # Configure the mock LLM instance:
     mock_llm_instance = MagicMock()
     MockChatOpenAI.return_value = mock_llm_instance
 
