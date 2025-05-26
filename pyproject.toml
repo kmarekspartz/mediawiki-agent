@@ -7,7 +7,7 @@ name = "mediawiki-agent"
 version = "0.1.0"
 description = "smolagent Tools for interacting with MediaWiki instances"
 authors = [{name = "kmarekspartz"}]
-requires-python = ">=3.13"
+requires-python = ">=3.10"
 dependencies = [
     "smolagents",
     "pywikibot",

@@ -1,0 +1,20 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+requests = "*"
+
+[dev-packages]
+pytest = "*"
+pytest-mock = "*"
+ruff = "*"
+mypy = "*"
+types-requests = "*"
+smolagents = "*"
+pywikibot = "*"
+pywikibot-scripts = "*"
+
+[requires]
+python_version = "3.10"
