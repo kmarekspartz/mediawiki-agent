@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "a49c1d7ac9f840136b2289b096a670adbf429bfdc03ae04f0d806421c9785426"
+            "sha256": "1ff5cffb9517bd89e4df75bb13462e46477b133ea151bb0a7801ed1273eb3c47"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -272,6 +272,10 @@
             ],
             "markers": "python_version >= '3.7'",
             "version": "==0.1.2"
+        },
+        "mediawiki-agent": {
+            "editable": true,
+            "file": "."
         },
         "mwparserfromhell": {
             "hashes": [
