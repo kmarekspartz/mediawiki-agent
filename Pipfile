@@ -7,7 +7,9 @@ name = "pypi"
 requests = "*"
 pywikibot = "*"
 pywikibot-scripts = "*"
-smolagents = "*"
+langchain = "*"
+langchain-openai = "*"
+langchain-community = "*"
 mediawiki-agent = {file = ".", editable = true}
 
 [dev-packages]
