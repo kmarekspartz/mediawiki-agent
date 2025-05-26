@@ -1,3 +1,3 @@
 #!/bin/sh
-ruff format .
-ruff check --fix .
+pipenv run ruff format .
+pipenv run ruff check --fix .

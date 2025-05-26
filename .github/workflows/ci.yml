@@ -10,29 +10,18 @@ on:
     branches: [ main ]
 
 jobs:
-  lint:
+  ci:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-python@v5
-    - run: pip install .[lint]
-    - run: ruff format --check .
-    - run: ruff check .
-
-  typecheck:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-python@v5
-    - run: pip install -e .
-    - run: pip install .[typecheck]
-    - run: mypy .
-
-  test:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-python@v5
-    - run: pip install -e .
-    - run: pip install -e .[test]
-    - run: pytest
+      with:
+        python-version: '3.13'
+        cache: 'pipenv'
+    - name: Install pipenv
+      run: curl https://raw.githubusercontent.com/pypa/pipenv/master/get-pipenv.py | python
+    - run: pipenv install --dev
+    - run: pipenv run pytest
+    - run: pipenv run mypy --install-types --non-interactive .
+    - run: pipenv run ruff check .
+    - run: pipenv run ruff format --check .
