@@ -92,7 +92,7 @@ def test_check_weblinks_mixed_links(mocker):
             return response
         elif url == "http://example.com/broken_timeout":
             raise requests.exceptions.RequestException
-        return mocker.MagicMock()  
+        return mocker.MagicMock()
 
     MockRequestsGet.side_effect = side_effect_func
 

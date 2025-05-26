@@ -5,7 +5,7 @@ def test_get_page_content_tool(mocker):
     mock_site_instance = mocker.MagicMock()
     mocker.patch("pywikibot.Site", return_value=mock_site_instance)
 
-    mock_page_instance = mocker.MagicMock() 
+    mock_page_instance = mocker.MagicMock()
     mock_page_instance.text = "This is the page content."
     mock_page_constructor = mocker.patch(
         "pywikibot.Page", return_value=mock_page_instance

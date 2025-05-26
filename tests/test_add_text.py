@@ -2,7 +2,7 @@ from mediawiki_agent.tools import add_text
 
 
 # Tests for add_text functionality
-def test_add_text_bottom(mocker):  
+def test_add_text_bottom(mocker):
     MockSite = mocker.patch("mediawiki_agent.tools.pywikibot.Site")
     MockPage = mocker.patch("mediawiki_agent.tools.pywikibot.Page")
     mock_site_instance = MockSite.return_value
