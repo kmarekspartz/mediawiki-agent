@@ -12,8 +12,14 @@ def test_add_text_bottom(mocker):
     page_title = "Test Page"
     text_to_add = " New text"
     summary = "Test summary bottom"
+    position = "bottom"
 
-    add_text(page_title, text_to_add, summary, position="bottom")
+    add_text.run({
+        "page_title": page_title,
+        "text_to_add": text_to_add,
+        "summary": summary,
+        "position": position
+    })
 
     MockSite.assert_called_once()
     MockPage.assert_called_once_with(mock_site_instance, page_title)
@@ -32,8 +38,14 @@ def test_add_text_top(mocker):
     page_title = "Test Page"
     text_to_add = "New text "
     summary = "Test summary top"
+    position = "top"
 
-    add_text(page_title, text_to_add, summary, position="top")
+    add_text.run({
+        "page_title": page_title,
+        "text_to_add": text_to_add,
+        "summary": summary,
+        "position": position
+    })
 
     MockSite.assert_called_once()
     MockPage.assert_called_once_with(mock_site_instance, page_title)
@@ -51,8 +63,14 @@ def test_add_text_empty_page_bottom(mocker):
     page_title = "Empty Page"
     text_to_add = "Some text"
     summary = "Test summary empty bottom"
+    position = "bottom"
 
-    add_text(page_title, text_to_add, summary, position="bottom")
+    add_text.run({
+        "page_title": page_title,
+        "text_to_add": text_to_add,
+        "summary": summary,
+        "position": position
+    })
 
     assert mock_page_instance.text == "Some text"
     mock_page_instance.save.assert_called_once_with(summary)
@@ -68,8 +86,14 @@ def test_add_text_empty_page_top(mocker):
     page_title = "Empty Page"
     text_to_add = "Some text"
     summary = "Test summary empty top"
+    position = "top"
 
-    add_text(page_title, text_to_add, summary, position="top")
+    add_text.run({
+        "page_title": page_title,
+        "text_to_add": text_to_add,
+        "summary": summary,
+        "position": position
+    })
 
     assert mock_page_instance.text == "Some text"
     mock_page_instance.save.assert_called_once_with(summary)

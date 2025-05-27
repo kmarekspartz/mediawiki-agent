@@ -18,7 +18,7 @@ def test_check_weblinks_no_broken_links(mocker):
     MockRequestsGet.return_value = mock_response
 
     page_title = "Test Page"
-    result = check_weblinks(page_title)
+    result = check_weblinks.run({"page_title": page_title})
 
     MockSite.assert_called_once()
     MockPage.assert_called_once_with(mock_site_instance, page_title)
@@ -42,7 +42,7 @@ def test_check_weblinks_one_broken_link_status_code(mocker):
     MockRequestsGet.return_value = mock_response
 
     page_title = "Test Page"
-    result = check_weblinks(page_title)
+    result = check_weblinks.run({"page_title": page_title})
 
     assert result == ["http://example.com/broken"]
     MockRequestsGet.assert_called_once_with(urls[0], timeout=10)
@@ -61,7 +61,7 @@ def test_check_weblinks_one_broken_link_exception(mocker):
     MockRequestsGet.side_effect = requests.exceptions.RequestException
 
     page_title = "Test Page"
-    result = check_weblinks(page_title)
+    result = check_weblinks.run({"page_title": page_title})
 
     assert result == ["http://example.com/timeout"]
     MockRequestsGet.assert_called_once_with(urls[0], timeout=10)
@@ -97,7 +97,7 @@ def test_check_weblinks_mixed_links(mocker):
     MockRequestsGet.side_effect = side_effect_func
 
     page_title = "Test Page"
-    result = check_weblinks(page_title)
+    result = check_weblinks.run({"page_title": page_title})
 
     assert result == [
         "http://example.com/broken404",
@@ -115,7 +115,7 @@ def test_check_weblinks_no_external_links(mocker):
     mock_page_instance.extlinks.return_value = []
 
     page_title = "Test Page"
-    result = check_weblinks(page_title)
+    result = check_weblinks.run({"page_title": page_title})
 
     assert result == []
     MockRequestsGet.assert_not_called()
