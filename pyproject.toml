@@ -5,11 +5,11 @@ build-backend = "hatchling.build"
 [project]
 name = "mediawiki-agent"
 version = "0.1.0"
-description = "smolagent Tools for interacting with MediaWiki instances"
+description = "Langchain Tools for interacting with MediaWiki instances"
 authors = [{name = "kmarekspartz"}]
 requires-python = ">=3.10"
 dependencies = [
-    "smolagents",
+    "langchain",
     "pywikibot",
     "pywikibot-scripts",
     "requests"
