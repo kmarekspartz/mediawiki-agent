@@ -10,6 +10,7 @@ pywikibot-scripts = "*"
 langchain = "*"
 langchain-openai = "*"
 langchain-community = "*"
+pydantic = "*"
 mediawiki-agent = {file = ".", editable = true}
 
 [dev-packages]

@@ -1,13 +1,14 @@
 from langchain_openai import ChatOpenAI
 from langchain.agents import AgentExecutor, create_openai_functions_agent
 from langchain_core.prompts import ChatPromptTemplate
+from pydantic import SecretStr
 from mediawiki_agent.tools import get_page_content, add_text, check_weblinks
 
 
 llm = ChatOpenAI(
-    model_name="phi-4",
-    openai_api_base="http://127.0.0.1:1234/v1",
-    openai_api_key="na",
+    model="phi-4",
+    base_url="http://127.0.0.1:1234/v1",
+    api_key=SecretStr("na"),
     temperature=0,
 )
 
