@@ -1,8 +1,8 @@
-from unittest.mock import MagicMock
+# from unittest.mock import MagicMock
 import pytest
-from mediawiki_agent.agent import agent_executor # The AgentExecutor instance
+# from mediawiki_agent.agent import agent_executor # The AgentExecutor instance
 # from mediawiki_agent.tools import get_page_content as get_page_content_tool_function # Not strictly needed
-from langchain_core.messages import AIMessage
+# from langchain_core.messages import AIMessage
 
 
 @pytest.mark.skip(reason="Test seems to depend on LLM actually running")
