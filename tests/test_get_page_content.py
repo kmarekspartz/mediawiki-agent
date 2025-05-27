@@ -12,7 +12,7 @@ def test_get_page_content_tool(mocker):
     )
 
     page_title = "Test Page"
-    result = get_page_content(page_title=page_title)
+    result = get_page_content.run({"page_title": page_title})
 
     mock_page_constructor.assert_called_once_with(mock_site_instance, page_title)
     assert result == "This is the page content."

@@ -1,20 +1,19 @@
 import pywikibot
 import requests
-from smolagents import tool
-from typing import Any, List
+from langchain.tools import tool
+from typing import List
 
 
 @tool
-def get_page_content(page_title: str) -> Any:  # str
+def get_page_content(page_title: str) -> str:
     """
-    Gets the content of a MediaWiki page using a pywikibot Site.
+    Gets the content of a MediaWiki page.
 
     Args:
-        site: a pywikibot.Site.
-        page_title: a string with the page title/path to the page within the Wiki.
+        page_title: The title of the MediaWiki page.
 
     Returns:
-        A string with the text content of the MediaWiki page
+        A string with the text content of the MediaWiki page.
     """
     site = pywikibot.Site()
     page = pywikibot.Page(site, page_title)
@@ -25,14 +24,13 @@ def get_page_content(page_title: str) -> Any:  # str
 def add_text(
     page_title: str, text_to_add: str, summary: str, position: str = "bottom"
 ) -> None:
-    """
-    Adds text to a MediaWiki page, either at the top or bottom.
+    """Adds text to a MediaWiki page, either at the top or bottom.
 
     Args:
-        page_title: The title of the MediaWiki page.
-        text_to_add: The text to add to the page.
-        summary: The summary of the edit.
-        position: Where to add the text, either 'top' or 'bottom'. Defaults to 'bottom'.
+        page_title: The title of the MediaWiki page to edit.
+        text_to_add: The text content to add to the page.
+        summary: A brief description of the changes made.
+        position: Specifies where to add the text. Must be 'top' or 'bottom'. Defaults to 'bottom'.
     """
     site = pywikibot.Site()
     page = pywikibot.Page(site, page_title)
@@ -50,13 +48,15 @@ def add_text(
 @tool
 def check_weblinks(page_title: str) -> List[str]:
     """
-    Checks all external links on a MediaWiki page for 4xx or 5xx HTTP status codes.
+    Checks all external web links on a MediaWiki page and returns a list of broken links.
+    A link is considered broken if it returns an HTTP status code of 4xx or 5xx.
 
     Args:
-        page_title: The title of the MediaWiki page.
+        page_title: The title of the MediaWiki page to check.
 
     Returns:
-        A list of URLs that are broken.
+        A list of strings, where each string is a URL of a broken external link.
+        Returns an empty list if no broken links are found or if the page has no external links.
     """
     site = pywikibot.Site()
     page = pywikibot.Page(site, page_title)
