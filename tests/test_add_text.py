@@ -14,12 +14,14 @@ def test_add_text_bottom(mocker):
     summary = "Test summary bottom"
     position = "bottom"
 
-    add_text.run({
-        "page_title": page_title,
-        "text_to_add": text_to_add,
-        "summary": summary,
-        "position": position
-    })
+    add_text.run(
+        {
+            "page_title": page_title,
+            "text_to_add": text_to_add,
+            "summary": summary,
+            "position": position,
+        }
+    )
 
     MockSite.assert_called_once()
     MockPage.assert_called_once_with(mock_site_instance, page_title)
@@ -40,12 +42,14 @@ def test_add_text_top(mocker):
     summary = "Test summary top"
     position = "top"
 
-    add_text.run({
-        "page_title": page_title,
-        "text_to_add": text_to_add,
-        "summary": summary,
-        "position": position
-    })
+    add_text.run(
+        {
+            "page_title": page_title,
+            "text_to_add": text_to_add,
+            "summary": summary,
+            "position": position,
+        }
+    )
 
     MockSite.assert_called_once()
     MockPage.assert_called_once_with(mock_site_instance, page_title)
@@ -65,12 +69,14 @@ def test_add_text_empty_page_bottom(mocker):
     summary = "Test summary empty bottom"
     position = "bottom"
 
-    add_text.run({
-        "page_title": page_title,
-        "text_to_add": text_to_add,
-        "summary": summary,
-        "position": position
-    })
+    add_text.run(
+        {
+            "page_title": page_title,
+            "text_to_add": text_to_add,
+            "summary": summary,
+            "position": position,
+        }
+    )
 
     assert mock_page_instance.text == "Some text"
     mock_page_instance.save.assert_called_once_with(summary)
@@ -88,12 +94,14 @@ def test_add_text_empty_page_top(mocker):
     summary = "Test summary empty top"
     position = "top"
 
-    add_text.run({
-        "page_title": page_title,
-        "text_to_add": text_to_add,
-        "summary": summary,
-        "position": position
-    })
+    add_text.run(
+        {
+            "page_title": page_title,
+            "text_to_add": text_to_add,
+            "summary": summary,
+            "position": position,
+        }
+    )
 
     assert mock_page_instance.text == "Some text"
     mock_page_instance.save.assert_called_once_with(summary)

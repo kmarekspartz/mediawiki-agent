@@ -8,16 +8,21 @@ llm = ChatOpenAI(
     model_name="phi-4",
     openai_api_base="http://127.0.0.1:1234/v1",
     openai_api_key="na",
-    temperature=0
+    temperature=0,
 )
 
 tools = [get_page_content, add_text, check_weblinks]
 
-prompt = ChatPromptTemplate.from_messages([
-    ("system", "You are a helpful assistant that can interact with MediaWiki pages."),
-    ("user", "{input}"),
-    ("placeholder", "{agent_scratchpad}"),
-])
+prompt = ChatPromptTemplate.from_messages(
+    [
+        (
+            "system",
+            "You are a helpful assistant that can interact with MediaWiki pages.",
+        ),
+        ("user", "{input}"),
+        ("placeholder", "{agent_scratchpad}"),
+    ]
+)
 
 agent = create_openai_functions_agent(llm=llm, tools=tools, prompt=prompt)
 

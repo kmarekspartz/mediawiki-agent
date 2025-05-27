@@ -1,7 +1,7 @@
 import pywikibot
 import requests
 from langchain.tools import tool
-from typing import Any, List
+from typing import List
 
 
 @tool
