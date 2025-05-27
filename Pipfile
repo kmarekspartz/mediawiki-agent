@@ -19,7 +19,8 @@ pytest-mock = "*"
 ruff = "*"
 mypy = "*"
 coverage = "*"
-exceptiongroup = "*" # backported from Python 3.11
+exceptiongroup = "*" # backported from Python 3.11+
+tomli = "*" # backported from Python 3.11+
 
 [requires]
 python_version = "3.10"
