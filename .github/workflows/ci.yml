@@ -21,7 +21,8 @@ jobs:
     - name: Install pipenv
       run: curl https://raw.githubusercontent.com/pypa/pipenv/master/get-pipenv.py | python
     - run: pipenv install --dev
-    - run: pipenv run pytest
+    - run: pipenv run coverage -m pytest
+    - run: pipenv run coverage report -m
     - run: pipenv run mypy --install-types --non-interactive .
     - run: pipenv run ruff check .
     - run: pipenv run ruff format --check .
